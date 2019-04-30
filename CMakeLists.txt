@@ -32,6 +32,16 @@ ADD_LIBRARY(hiredis SHARED
     sockcompat.c
     sslio.c)
 
+ADD_LIBRARY(hiredis_static STATIC
+    async.c
+    dict.c
+    hiredis.c
+    net.c
+    read.c
+    sds.c
+    sockcompat.c
+    sslio.c)
+
 SET_TARGET_PROPERTIES(hiredis
     PROPERTIES
     VERSION "${HIREDIS_SONAME}")
@@ -43,6 +53,9 @@ TARGET_INCLUDE_DIRECTORIES(hiredis PUBLIC .)
 CONFIGURE_FILE(hiredis.pc.in hiredis.pc @ONLY)
 
 INSTALL(TARGETS hiredis
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+
+INSTALL(TARGETS hiredis_static
     DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 
 INSTALL(FILES hiredis.h read.h sds.h async.h
