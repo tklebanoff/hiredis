@@ -912,25 +912,25 @@ int main(int argc, char **argv) {
 
     printf("\nTesting against TCP connection (%s:%d):\n", cfg.tcp.host, cfg.tcp.port);
     cfg.type = CONN_TCP;
-    printf("test_blocking_connection\n");
+    printf("    test_blocking_connection\n");
     test_blocking_connection(cfg);
-    printf("test_blocking_connection_timeouts\n");
+    printf("    test_blocking_connection_timeouts\n");
     test_blocking_connection_timeouts(cfg);
-    printf("test_blocking_io_errors\n");
+    printf("    test_blocking_io_errors\n");
     test_blocking_io_errors(cfg);
-    printf("test_invalid_timeout_errors\n");
+    printf("    test_invalid_timeout_errors\n");
     test_invalid_timeout_errors(cfg);
-    printf("test_append_formatted_commands\n");
+    printf("    test_append_formatted_commands\n");
     test_append_formatted_commands(cfg);
     if (throughput) test_throughput(cfg);
 
     printf("\nTesting against Unix socket connection (%s):\n", cfg.unix_sock.path);
     cfg.type = CONN_UNIX;
-    printf("test_blocking_connection\n");
+    printf("    test_blocking_connection\n");
     test_blocking_connection(cfg);
-    printf("test_blocking_connection_timeouts\n");
+    printf("    test_blocking_connection_timeouts\n");
     test_blocking_connection_timeouts(cfg);
-    printf("test_blocking_io_errors\n");
+    printf("    test_blocking_io_errors\n");
     test_blocking_io_errors(cfg);
     if (throughput) test_throughput(cfg);
 

@@ -4,6 +4,8 @@ PROJECT(hiredis)
 
 OPTION(HIREDIS_SSL "Link against OpenSSL" OFF)
 
+include(CTest)
+
 MACRO(getVersionBit name)
   SET(VERSION_REGEX "^#define ${name} (.+)$")
   FILE(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/hiredis.h"
