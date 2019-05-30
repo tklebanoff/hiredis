@@ -446,6 +446,8 @@ static void test_blocking_connection_errors(void) {
         test("Returns error when host cannot be resolved: ");
         // First see if this domain name *actually* resolves to NXDOMAIN
         c = redisConnect(HIREDIS_BAD_DOMAIN, 6379);
+        printf("redisConnect to bad domain: %s\n", HIREDIS_BAD_DOMAIN);
+        printf("response errstr: %s\n", c->errstr);
         test_cond(
             c->err == REDIS_ERR_OTHER &&
             (strcmp(c->errstr, "Name or service not known") == 0 ||
