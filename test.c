@@ -443,11 +443,12 @@ static void test_blocking_connection_errors(void) {
     int rv = getaddrinfo(HIREDIS_BAD_DOMAIN, "6379", &hints, &ai_tmp);
     if (rv != 0) {
         // Address does *not* exist
-        test("Returns error when host cannot be resolved: ");
+        test("Returns error when host cannot be resolved: \n");
         // First see if this domain name *actually* resolves to NXDOMAIN
         c = redisConnect(HIREDIS_BAD_DOMAIN, 6379);
-        printf("redisConnect to bad domain: %s\n", HIREDIS_BAD_DOMAIN);
-        printf("response errstr: %s\n", c->errstr);
+        printf("    redisConnect to bad domain: %s\n", HIREDIS_BAD_DOMAIN);
+        printf("    response err: %d\n", c->err);
+        printf("    response errstr: %s\n", c->errstr);
         test_cond(
             c->err == REDIS_ERR_OTHER &&
             (strcmp(c->errstr, "Name or service not known") == 0 ||
@@ -455,6 +456,7 @@ static void test_blocking_connection_errors(void) {
              strcmp(c->errstr,
                     "nodename nor servname provided, or not known") == 0 ||
              strcmp(c->errstr, "No address associated with hostname") == 0 ||
+             strcmp(c->errstr, "Name does not resolve") == 0 ||
              strcmp(c->errstr, "Temporary failure in name resolution") == 0 ||
              strcmp(c->errstr,
                     "hostname nor servname provided, or not known") == 0 ||
